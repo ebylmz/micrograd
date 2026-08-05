@@ -1,2 +1,12 @@
 # micrograd
-A tiny scalar-valued autograd engine and a neural net library on top of it with PyTorch-like API
+
+A lightweight autograd engine and neural network library built for educational purposes, inspired by Andrej Karpathy's `micrograd`.
+
+## Environment Setup
+
+Create and activate the conda environment
+```bash
+conda env create -f environment.yml
+conda activate micrograd
+```
+
