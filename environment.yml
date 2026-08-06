@@ -5,6 +5,8 @@ channels:
 dependencies:
     - python=3.10
     - ipykernel
+    - graphviz
+    - python-graphviz
     - pip
     - pip:
         - numpy
