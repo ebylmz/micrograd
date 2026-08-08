@@ -1,6 +1,7 @@
 import math
 
 class Value:
+    """ Stores a single scalar value and its gradient """
     def __init__(self, data, _children=(), _op='', label=''):
         self.data = data
         self.grad = 0.0
@@ -47,7 +48,7 @@ class Value:
         return out
 
     def relu(self):
-        out = Value(0 if self.data < 0.0 else self.data, (self, ), 'relu')
+        out = Value(0.0 if self.data < 0.0 else self.data, (self, ), 'ReLU')
 
         def _backward():
             # local derivative is 0.0 or 1.0
