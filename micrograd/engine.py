@@ -45,6 +45,15 @@ class Value:
             self.grad += out.data * out.grad
         out._backward = _backward
         return out
+
+    def relu(self):
+        out = Value(0 if self.data < 0.0 else self.data, (self, ), 'relu')
+
+        def _backward():
+            # local derivative is 0.0 or 1.0
+            self.grad += (out.data > 0.0) * out.grad
+        out._backward = _backward
+        return out
     
     def tanh(self):
         # tanh = e**(2x) - 1 / e**(2x) + 1
