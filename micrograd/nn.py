@@ -26,6 +26,9 @@ class Neuron(Module):
     def parameters(self) -> list[Value]:
         return self.w + [self.b]
 
+    def __repr__(self):
+        return f"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})"
+
 
 class Layer(Module):
     def __init__(self, nin: int, nout: int, nonlin: bool) -> None:
@@ -38,6 +41,9 @@ class Layer(Module):
 
     def parameters(self) -> list[Value]:
         return [p for neuron in self.neurons for p in neuron.parameters()]
+
+    def __repr__(self):
+        return f"Layer of [{', '.join(str(n) for n in self.neurons)}]"
 
 
 class MLP(Module):
@@ -53,3 +59,6 @@ class MLP(Module):
 
     def parameters(self) -> list[Value]:
         return [p for layer in self.layers for p in layer.parameters()]
+
+    def __repr__(self):
+        return f"MLP of [{', '.join(str(layer) for layer in self.layers)}]"
