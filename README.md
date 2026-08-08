@@ -10,3 +10,8 @@ conda env create -f environment.yml
 conda activate micrograd
 ```
 
+build micrograd package
+```bash
+pip install -e .
+```
+
