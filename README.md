@@ -21,8 +21,7 @@ pip install -e .
 ```
 
 ## Example Usage
-Below is a slightly contrived example showing a number of possible supported operations:
-
+Below is a basic example showing a number of possible supported operations:
 
 ```python
 from micrograd.engine import Value
@@ -51,6 +50,36 @@ print(f"Gradient dg/da: {a.grad:.4f}")  # Outputs 138.8338
 print(f"Gradient dg/db: {b.grad:.4f}")  # Outputs 645.5773
 ```
 
+We can also visualize the constructed computation graph:
+```python
+# Creating a small neural network
+def network(x1, x2, w1, w2, b):
+    # inputs
+    x1 = Value(x1, label='x1')
+    x2 = Value(x2, label='x2')
+    # weights
+    w1 = Value(w1, label='w1')
+    w2 = Value(w2, label='w2')
+    # bias
+    b = Value(b, label='b')
+
+    # network
+    x1w1 = x1 * w1; x1w1.label = 'x1w1'
+    x2w2 = x2 * w2; x2w2.label = 'x2w2'
+    x1w1x2w2 = x1w1 + x2w2; x1w1x2w2.label = 'x1w1 + x2w2'
+    n = x1w1x2w2 + b; n.label = 'n'
+    o = n.tanh(); o.label = 'o'
+    return o
+
+
+o = network(x1=2.0, x2=0.0, w1=-3.0, w2=1.0, b=6.7)
+draw_dot(o)
+```
+
+which draws:
+![DAG](outs/comp_graph.png)
+
+
 ## Notebooks & Learning Progress
 
 During development, I followed Andrej Karpathy's [video tutorial](https://youtu.be/VMj-3S1tku0?si=DhD3Qg8oP3I0n4O0) and practiced all core concepts step-by-step in Jupyter notebooks. You can view all progress and experimentation in the [notebooks](notebooks) directory.
@@ -60,7 +89,7 @@ During development, I followed Andrej Karpathy's [video tutorial](https://youtu.
 The notebook [p5_demo.ipynb](notebooks/p5_demo.ipynb) provides a full demo of training a 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from micrograd.nn module, implementing a simple svm "max-margin" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:
 ![decision boundary for moon dataset](outs/cls_moon.png)
 
-## Running tests
+## Running Tests
 
 To run the unit tests you will have to install PyTorch, which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:
 ```bash
