@@ -50,7 +50,7 @@ print(f"Gradient dg/da: {a.grad:.4f}")  # Outputs 138.8338
 print(f"Gradient dg/db: {b.grad:.4f}")  # Outputs 645.5773
 ```
 
-We can also visualize the constructed computation graph:
+The autograd engine dynamically constructs a Directed Acyclic Graph (DAG) during the forward pass to track operations and backpropagate gradients:
 ```python
 # Creating a small neural network
 
@@ -73,8 +73,8 @@ o = n.tanh(); o.label = 'o'
 draw_dot(o)
 ```
 
-which draws the computation graph for the neural network:
-![DAG](outs/comp_graph.svg)
+Below is an example of the computational graph:
+![computation graph](outs/comp_graph.svg)
 
 
 ## Notebooks & Learning Progress
@@ -84,6 +84,7 @@ During development, I followed Andrej Karpathy's [video tutorial](https://youtu.
 ## Training a Neural Network
 
 The notebook [p5_demo.ipynb](notebooks/p5_demo.ipynb) provides a full demo of training a 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from micrograd.nn module, implementing a simple svm "max-margin" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:
+
 ![decision boundary for moon dataset](outs/cls_moon.png)
 
 ## Running Tests
