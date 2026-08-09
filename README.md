@@ -53,31 +53,28 @@ print(f"Gradient dg/db: {b.grad:.4f}")  # Outputs 645.5773
 We can also visualize the constructed computation graph:
 ```python
 # Creating a small neural network
-def network(x1, x2, w1, w2, b):
-    # inputs
-    x1 = Value(x1, label='x1')
-    x2 = Value(x2, label='x2')
-    # weights
-    w1 = Value(w1, label='w1')
-    w2 = Value(w2, label='w2')
-    # bias
-    b = Value(b, label='b')
 
-    # network
-    x1w1 = x1 * w1; x1w1.label = 'x1w1'
-    x2w2 = x2 * w2; x2w2.label = 'x2w2'
-    x1w1x2w2 = x1w1 + x2w2; x1w1x2w2.label = 'x1w1 + x2w2'
-    n = x1w1x2w2 + b; n.label = 'n'
-    o = n.tanh(); o.label = 'o'
-    return o
+# inputs
+x1 = Value(2.0, label='x1')
+x2 = Value(0.0, label='x2')
+# weights
+w1 = Value(-3.0, label='w1')
+w2 = Value(1.0, label='w2')
+# bias
+b = Value(6.7, label='b')
 
+# network
+x1w1 = x1 * w1; x1w1.label = 'x1w1'
+x2w2 = x2 * w2; x2w2.label = 'x2w2'
+x1w1x2w2 = x1w1 + x2w2; x1w1x2w2.label = 'x1w1 + x2w2'
+n = x1w1x2w2 + b; n.label = 'n'
+o = n.tanh(); o.label = 'o'
 
-o = network(x1=2.0, x2=0.0, w1=-3.0, w2=1.0, b=6.7)
 draw_dot(o)
 ```
 
-which draws:
-![DAG](outs/comp_graph.png)
+which draws the computation graph for the neural network:
+![DAG](outs/comp_graph.svg)
 
 
 ## Notebooks & Learning Progress
