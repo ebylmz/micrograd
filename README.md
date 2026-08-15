@@ -3,9 +3,9 @@
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A lightweight autograd engine and scalar-valued neural network library built from scratch for educational purposes, inspired by Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd).
+Neural networks are essentially mathematical expressions. To deeply understand how they optimize and learn under the hood, I built `micrograd`, a lightweight scalar autograd engine and neural network library implemented from scratch, inspired by Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd).
 
-`micrograd` implements backpropagation over a dynamically built Directed Acyclic Graph (DAG) and provides a PyTorch-like API for constructing Multi-Layer Perceptrons (MLPs).
+`micrograd` implements backpropagation over a dynamically built Directed Acyclic Graph (DAG) and provides a PyTorch-like API for constructing Multi Layer Perceptrons (MLPs).
 
 ## Environment Setup
 
@@ -77,10 +77,6 @@ Below is an example of the computational graph:
 ![computation graph](outs/comp_graph.svg)
 
 
-## Notebooks & Learning Progress
-
-During development, I followed Andrej Karpathy's [video tutorial](https://youtu.be/VMj-3S1tku0?si=DhD3Qg8oP3I0n4O0) and practiced all core concepts step-by-step in Jupyter notebooks. You can view all progress and experimentation in the [notebooks](notebooks) directory.
-
 ## Training a Neural Network
 
 The notebook [p5_demo.ipynb](notebooks/p5_demo.ipynb) provides a full demo of training a 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from micrograd.nn module, implementing a simple svm "max-margin" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:
@@ -93,6 +89,12 @@ To run the unit tests you will have to install PyTorch, which the tests use as a
 ```bash
 python -m pytest
 ```
+
+## Notebooks & Learning Progress
+
+During development, I followed Andrej Karpathy's [video tutorial](https://youtu.be/VMj-3S1tku0?si=DhD3Qg8oP3I0n4O0) and practiced all core concepts step-by-step in Jupyter notebooks. You can view all progress and experimentation in the [notebooks](notebooks) directory. 
+
+I summarize the whole optimisation process in my own words in [conclusion.md](conclusion.md). In addition, I highly recommend [3Blue1Brown's video](https://www.youtube.com/watch?v=tIeHLnjs5U8) for an intuitive visual explanation of backpropagation and gradient descent. 
 
 
 ## Licence
